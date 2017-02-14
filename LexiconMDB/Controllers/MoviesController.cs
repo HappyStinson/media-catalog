@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using LexiconMDB.DAL;
 using LexiconMDB.Models;
@@ -40,40 +36,20 @@ namespace LexiconMDB.Controllers
                     case "length":
                         movies = movies.OrderBy(m => m.Length);
                         break;
-                    default:
-                        break;
                 }
             }
             return View(movies.ToList());
         }
 
-        // GET: Movies/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Movie movie = db.Movies.Find(id);
-            if (movie == null)
-            {
-                return HttpNotFound();
-            }
-            return View(movie);
-        }
-
         // GET: Movies/Create
-        public ActionResult Create()
+        public ActionResult Add()
         {
             return View();
         }
 
-        // POST: Movies/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Length,Genre,AgeLimit,MetaScore")] Movie movie)
+        public ActionResult Add([Bind(Include = "Id, Title, Length, Genre, AgeLimit, ReleaseYear, Metascore, IMDbTopRated")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -100,12 +76,9 @@ namespace LexiconMDB.Controllers
             return View(movie);
         }
 
-        // POST: Movies/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Length,Genre,AgeLimit,MetaScore")] Movie movie)
+        public ActionResult Edit([Bind(Include = "Id, Title, Length, Genre, AgeLimit, ReleaseYear, Metascore, IMDbTopRated")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -117,7 +90,7 @@ namespace LexiconMDB.Controllers
         }
 
         // GET: Movies/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Remove(int? id)
         {
             if (id == null)
             {
@@ -132,7 +105,7 @@ namespace LexiconMDB.Controllers
         }
 
         // POST: Movies/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Remove")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
