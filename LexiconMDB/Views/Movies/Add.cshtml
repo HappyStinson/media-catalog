@@ -1,22 +1,20 @@
 ﻿@model LexiconMDB.Models.Movie
 
 @{
-    ViewBag.Title = "Edit Movie";
+    ViewBag.Title = "Add Movie";
 }
 
-<h2>Edit</h2>
+<h2>Add</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Movie</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
 
+    <div class="form-horizontal">
+      <h4>Movie</h4>
+      <hr />
+      @Html.ValidationSummary(true, "", new { @class = "text-danger" })
       <div class="form-group">
         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
